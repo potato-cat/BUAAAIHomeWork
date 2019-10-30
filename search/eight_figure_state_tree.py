@@ -7,7 +7,7 @@ from PyQt5.QtWidgets import *
 from search.eight_figure_state import State
 from search.ui.big_arrow import BigArrow
 from search.ui.button import Button, BUTTON_WIDTH
-from search.ui.eight_figure_map import EightFigureMap, EIGHT_FIGURE_WIDTH
+from search.ui.figure_map import FigureMap, EIGHT_FIGURE_WIDTH
 from search.ui.small_arrow import SmallArrow
 
 
@@ -26,7 +26,7 @@ class EightFigureStateTree(QGraphicsView):
             if w > self.tree_max_width:
                 self.tree_max_width = w
         self.tree_max_depth = (150 + 50) * 4 * (1 - 0.75 ** (self.max_depth + 1))
-        figure = EightFigureMap(start)
+        figure = FigureMap(start)
         figure.setPos((self.tree_max_width - 150) / 2, 0)
         scene.addItem(figure)
         for i in range(self.max_depth + 1):
@@ -36,7 +36,7 @@ class EightFigureStateTree(QGraphicsView):
                     l0 = self.tree_max_width / len(self.width_map[i])
                     l = self.tree_max_width / len(self.width_map[i + 1])
                     for c in s.children:
-                        figure = EightFigureMap(c)
+                        figure = FigureMap(c)
                         line = SmallArrow(QPointF(75 * 0.75 ** i + j * l0
                                                   + (l0 - 150 * 0.75 ** i) / 2,
                                                   (150 + 50) * 4 * (1 - 0.75 ** i) + 150 * 0.75 ** i),

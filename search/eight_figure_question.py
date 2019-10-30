@@ -8,7 +8,7 @@ from search.eight_figure_state import State
 from search.eight_figure_state_tree import EightFigureStateTree
 from search.ui.big_arrow import BigArrow
 from search.ui.button import Button, BUTTON_WIDTH
-from search.ui.eight_figure_map import EightFigureMap
+from search.ui.figure_map import FigureMap
 
 
 class EightFigureView(QGraphicsView):
@@ -22,10 +22,10 @@ class EightFigureView(QGraphicsView):
                           [7, 0, 8]])
         scene = QGraphicsScene(0, 0, 540, 300)
         self.setScene(scene)
-        self.startMap = EightFigureMap(self.start)
+        self.startMap = FigureMap(self.start)
         self.startMap.setPos(10, 10)
         self.startMap.setInteractive(True)
-        self.endMap = EightFigureMap(self.end)
+        self.endMap = FigureMap(self.end)
         self.endMap.setPos(250, 10)
         self.arrow = BigArrow(QPointF(10 + 150, 75), QPointF(250, 75))
         self.resetButton = Button('重置')
@@ -74,7 +74,7 @@ class EightFigureView(QGraphicsView):
     def resetStart(self):
         self.scene().removeItem(self.startMap)
         self.startMap.deleteLater()
-        self.startMap = EightFigureMap(self.start)
+        self.startMap = FigureMap(self.start)
         self.startMap.setPos(10, 10)
         self.scene().addItem(self.startMap)
         self.startMap.setInteractive(True)

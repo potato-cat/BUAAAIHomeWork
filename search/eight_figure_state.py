@@ -13,7 +13,7 @@ class State(object):
         self.parent = None  # 用于获取路径
         self.children = []  # 用于画图
         self.operator = -1  # 用于动画
-        self.in_path = False # 用于画图
+        self.in_path = False  # 用于画图
         for i in range(self.rows):
             for j in range(self.cols):
                 if self.state[i][j] == 0:
@@ -57,6 +57,33 @@ class State(object):
             for j in range(self.cols):
                 h += self[i][j] * 10 ** (3 * i + j)
         return h
+
+    def operate(self, operator):
+        vacancy = self.vacancy
+        state = self.state
+        s = [[state[0][0], state[0][1], state[0][2]],
+             [state[1][0], state[1][1], state[1][2]],
+             [state[2][0], state[2][1], state[2][2]]]
+        if operator == 0:  # down
+            temp = self[vacancy[0] + 1][vacancy[1]]
+            s[vacancy[0]][vacancy[1]] = temp
+            s[vacancy[0] + 1][vacancy[1]] = 0
+            return State(s)
+        if operator == 1:  # up
+            temp = self[vacancy[0] - 1][vacancy[1]]
+            s[vacancy[0]][vacancy[1]] = temp
+            s[vacancy[0] - 1][vacancy[1]] = 0
+            return State(s)
+        if operator == 2:  # left
+            temp = self[vacancy[0]][vacancy[1] - 1]
+            s[vacancy[0]][vacancy[1]] = temp
+            s[vacancy[0]][vacancy[1] - 1] = 0
+            return State(s)
+        if operator == 3:  # right
+            temp = self[vacancy[0]][vacancy[1] + 1]
+            s[vacancy[0]][vacancy[1]] = temp
+            s[vacancy[0]][vacancy[1] + 1] = 0
+            return State(s)
 
     def do_operation(self, operator):
         vacancy = self.vacancy

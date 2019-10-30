@@ -24,7 +24,7 @@ class Figure(QGraphicsObject):
                          str(self.n))
 
     def boundingRect(self):
-        return QRectF(0, 0, 100, 100)
+        return QRectF(0, 0, FIGURE_WIDTH, FIGURE_HEIGHT)
 
 
 if __name__ == '__main__':
